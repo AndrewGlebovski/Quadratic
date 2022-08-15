@@ -8,7 +8,7 @@ int solution(double, double, double, double *);
 
 int main(){
     // read parameters
-    double a, b, c;
+    double a=0, b=0, c=0;
     printf("Pass parameters this way: -1.5 2 20.25\n");
     scanf("%lf %lf %lf", &a, &b, &c);
     // calculate result
