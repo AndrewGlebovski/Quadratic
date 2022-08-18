@@ -15,17 +15,22 @@ double discriminant(double a, double b, double c) {
 
 
 /* Calculates solutions */
-int solution(double a, double b, double c, double *solutions) {
+struct result solution(double a, double b, double c) {
+    struct result res = {0, 0, 0};
+
     // in case 'a' equals zero
     if (compare(a, 0.0) == 0) {
 
         // in case 'b' equals zero
-        if (compare(b, 0.0) == 0)
-            return -1;
+        if (compare(b, 0.0) == 0){
+            res.n = -1;
+            return res;
+        }
         
         // linear function
-        solutions[0] = -c / b;
-        return 1;
+        res.n = 1;
+        res.x1 = -c / b;
+        return res;
     }
 
     double d = discriminant(a, b, c);
@@ -34,17 +39,19 @@ int solution(double a, double b, double c, double *solutions) {
     printf("%f\n", d);
     */
     if (compare(d, 0.0) == 1) {
-        solutions[0] = (-b + d) / (2 * a);
-        solutions[1] = (-b - d) / (2 * a);
-        return 2;
+        res.n = 2;
+        res.x1 = (-b + d) / (2 * a);
+        res.x2 = (-b - d) / (2 * a);
     }
     else if (compare(d, 0.0) == 0) {
-        solutions[0]=(-b) / (2 * a);
-        return 1;
+        res.n = 1;
+        res.x1 = (-b) / (2 * a);
     }
     else {
-        return 0;
+        res.n = 0;
     }
+
+    return res;
 }
 
 
