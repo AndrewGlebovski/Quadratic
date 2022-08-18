@@ -27,8 +27,10 @@ int main(){
         printf("x1 = %f, x2 = %f", solutions[0], solutions[1]);
     else if (n==1)
         printf("x = %f", solutions[0]);
-    else
+    else if (n==0)
         printf("No solutions... sad");
+    else
+        printf("Math error");
     
     // return
     return 0;
