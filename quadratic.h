@@ -1,8 +1,8 @@
 // Result structure
 struct result {
-    int n = 0;
-    double x1 = 0;
-    double x2 = 0;
+    int n;
+    double x1;
+    double x2;
 };
 
 

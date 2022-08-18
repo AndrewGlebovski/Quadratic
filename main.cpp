@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "quadratic.hpp"
+#include "quadratic.h"
 
 
 int input(double *a, double *b, double *c);

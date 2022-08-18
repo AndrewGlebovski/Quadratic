@@ -1,5 +1,5 @@
 #include <math.h>
-#include "quadratic.hpp"
+#include "quadratic.h"
 
 
 static const double NEAR_ZERO = 10e-7; // The biggest value that will be rounded to zero
