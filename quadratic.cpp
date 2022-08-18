@@ -1,11 +1,10 @@
 #include <math.h>
+#include "quadratic.hpp"
 
 
 static const double NEAR_ZERO = 10e-7; // The biggest value that will be rounded to zero
 
 
-double discriminant(double a, double b, double c);
-int solution(double a, double b, double c, double *solutions);
 int compare(double a, double b);
 
 

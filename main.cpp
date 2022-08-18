@@ -1,8 +1,5 @@
 #include <stdio.h>
-
-
-double discriminant(double a, double b, double c);
-int solution(double a, double b, double c, double *solutions);
+#include "quadratic.hpp"
 
 
 int main(){
