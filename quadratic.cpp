@@ -1,8 +1,7 @@
-#include <math.h>
 #include "quadratic.h"
 
 
-enum COMPARE_FLAG {LESS = -1, EQUAL, GREATER}; // Flags that returns compare function
+enum COMPARE_FLAGS {LESS = -1, EQUAL, GREATER}; // Flags that returns compare function
 static const double NEAR_ZERO = 1e-6; // The biggest value that will be rounded to zero
 
 
@@ -20,13 +19,13 @@ Solution solve_quadratic(double a, double b, double c) {
     double d = get_discriminant(a, b, c);
 
     // init result
-    Solution result = {0, NAN, NAN};
+    Solution result = {NO_SOLUTIONS, NAN, NAN};
 
     // check discriminant
     if (compare(d, 0.0) == GREATER)
-        result = {2, (-b + d) / (2 * a), (-b - d) / (2 * a)};
+        result = {TWO_SOLUTIONS, (-b + d) / (2 * a), (-b - d) / (2 * a)};
     else if (compare(d, 0.0) == EQUAL)
-        result = {1, -b / (2 * a), NAN};
+        result = {ONE_SOLUTION, -b / (2 * a), NAN};
     
     // return
     return result;
@@ -36,18 +35,18 @@ Solution solve_quadratic(double a, double b, double c) {
 /* Solves a linear equation */
 Solution solve_linear(double k, double b) {
     // init result
-    Solution result = {0, NAN, NAN};
+    Solution result = {NO_SOLUTIONS, NAN, NAN};
 
     if (compare(k, 0.0) == EQUAL)
-        result = {-1, NAN, NAN}; // in case 'k' equals zero
+        result = {ERROR, NAN, NAN}; // in case 'k' equals zero
     else
-        result = {1, -b / k, 0};
+        result = {ONE_SOLUTION, -b / k, 0};
     
     return result;
 }
 
 
-/* Compares two digits */
+/* Compares two numbers */
 int compare(double a, double b) {
     if ((a - b) > NEAR_ZERO)
         return GREATER;
