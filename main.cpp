@@ -15,7 +15,7 @@ int main() {
         return 0;
 
     // calculate result
-    Solution result = get_solution(a, b, c);
+    Solution result = solve_quadratic(a, b, c);
 
     // print result
     output(result);

@@ -10,40 +10,39 @@ static double get_discriminant(double a, double b, double c);
 static int compare(double a, double b);
 
 
-/* Calculates discriminant */
-double get_discriminant(double a, double b, double c) {
-    return b * b - 4 * a * c;
-}
-
-
-/* Calculates solutions */
-Solution get_solution(double a, double b, double c) {
-    // init result
-    Solution result = {0, 0, 0};
-
+/* Solves a quadratic equation */
+Solution solve_quadratic(double a, double b, double c) {
     // in case 'a' equals zero
-    if (compare(a, 0.0) == EQUAL) {
-
-        // in case 'b' equals zero
-        if (compare(b, 0.0) == EQUAL)
-            result = {-1, 0, 0};
-        // linear function
-        else
-            result = {1, -c / b, 0};
-
-        return result;
-    }
+    if (compare(a, 0.0) == EQUAL)
+        return solve_linear(b, c);
 
     // get discriminant
     double d = get_discriminant(a, b, c);
+
+    // init result
+    Solution result = {0, NAN, NAN};
 
     // check discriminant
     if (compare(d, 0.0) == GREATER)
         result = {2, (-b + d) / (2 * a), (-b - d) / (2 * a)};
     else if (compare(d, 0.0) == EQUAL)
-        result = {1, -b / (2 * a), 0};
+        result = {1, -b / (2 * a), NAN};
     
     // return
+    return result;
+}
+
+
+/* Solves a linear equation */
+Solution solve_linear(double k, double b) {
+    // init result
+    Solution result = {0, NAN, NAN};
+
+    if (compare(k, 0.0) == EQUAL)
+        result = {-1, NAN, NAN}; // in case 'k' equals zero
+    else
+        result = {1, -b / k, 0};
+    
     return result;
 }
 
@@ -55,4 +54,10 @@ int compare(double a, double b) {
     else if ((a - b) < -NEAR_ZERO)
         return LESS;
     return EQUAL;
+}
+
+
+/* Calculates discriminant */
+double get_discriminant(double a, double b, double c) {
+    return b * b - 4 * a * c;
 }

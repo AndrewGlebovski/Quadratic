@@ -7,5 +7,6 @@ typedef struct Solution {
 
 
 
-// Global Quadratic functions
-Solution get_solution(double a, double b, double c);
+// Global functions
+Solution solve_quadratic(double a, double b, double c);
+Solution solve_linear(double k, double b);
