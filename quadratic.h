@@ -1,12 +1,11 @@
-// Result structure
-struct result {
+// Global Structures
+typedef struct Solution {
     int n;
     double x1;
     double x2;
-};
+} Solution;
 
 
 
-// Quadratic functions
-double discriminant(double a, double b, double c);
-struct result solution(double a, double b, double c);
+// Global Quadratic functions
+Solution get_solution(double a, double b, double c);

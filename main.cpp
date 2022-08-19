@@ -3,7 +3,7 @@
 
 
 int input(double *a, double *b, double *c);
-void output(struct result res);
+void output(Solution resultult);
 
 
 int main() {
@@ -15,17 +15,17 @@ int main() {
         return 0;
 
     // calculate result
-    struct result res = solution(a, b, c);
+    Solution result = get_solution(a, b, c);
 
     // print result
-    output(res);
+    output(result);
     
     // return
     return 0;
 }
 
 
-/* Calculates discriminant */
+/* Gets input */
 int input(double *a, double *b, double *c) {
     printf("Pass parameters this way: -1.5 2 20.25\n");
     
@@ -38,13 +38,13 @@ int input(double *a, double *b, double *c) {
 }
 
 
-/* Calculates discriminant */
-void output(struct result res) {
-    if (res.n==2)
-        printf("x1 = %f, x2 = %f", res.x1, res.x2);
-    else if (res.n==1)
-        printf("x = %f", res.x1);
-    else if (res.n==0)
+/* Prints result */
+void output(Solution result) {
+    if (result.n==2)
+        printf("x1 = %f, x2 = %f", result.x1, result.x2);
+    else if (result.n==1)
+        printf("x = %f", result.x1);
+    else if (result.n==0)
         printf("No solutions... sad");
     else
         printf("Math error");

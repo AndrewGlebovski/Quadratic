@@ -5,53 +5,45 @@
 static const double NEAR_ZERO = 10e-7; // The biggest value that will be rounded to zero
 
 
+double get_discriminant(double a, double b, double c);
 int compare(double a, double b);
 
 
 /* Calculates discriminant */
-double discriminant(double a, double b, double c) {
+double get_discriminant(double a, double b, double c) {
     return pow(b, 2) - 4 * a * c;
 }
 
 
 /* Calculates solutions */
-struct result solution(double a, double b, double c) {
-    struct result res = {0, 0, 0};
+Solution get_solution(double a, double b, double c) {
+    // init result
+    Solution result = {0, 0, 0};
 
     // in case 'a' equals zero
     if (compare(a, 0.0) == 0) {
 
         // in case 'b' equals zero
-        if (compare(b, 0.0) == 0){
-            res.n = -1;
-            return res;
-        }
-        
+        if (compare(b, 0.0) == 0)
+            result = {-1, 0, 0};
         // linear function
-        res.n = 1;
-        res.x1 = -c / b;
-        return res;
+        else
+            result = {1, -c / b, 0};
+
+        return result;
     }
 
-    double d = discriminant(a, b, c);
-    /* DEBUG
-    printf("%f %f %f\n", a, b, c);
-    printf("%f\n", d);
-    */
-    if (compare(d, 0.0) == 1) {
-        res.n = 2;
-        res.x1 = (-b + d) / (2 * a);
-        res.x2 = (-b - d) / (2 * a);
-    }
-    else if (compare(d, 0.0) == 0) {
-        res.n = 1;
-        res.x1 = (-b) / (2 * a);
-    }
-    else {
-        res.n = 0;
-    }
+    // get discriminant
+    double d = get_discriminant(a, b, c);
 
-    return res;
+    // check discriminant
+    if (compare(d, 0.0) == 1)
+        result = {2, (-b + d) / (2 * a), (-b - d) / (2 * a)};
+    else if (compare(d, 0.0) == 0)
+        result = {1, -b / (2 * a), 0};
+    
+    // return
+    return result;
 }
 
 
