@@ -3,7 +3,7 @@
 
 
 int input(double *a, double *b, double *c);
-void output(Solution resultult);
+void output(Solution result);
 
 
 int main() {
