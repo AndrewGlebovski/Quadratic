@@ -2,16 +2,17 @@
 #include "quadratic.h"
 
 
-static const double NEAR_ZERO = 10e-7; // The biggest value that will be rounded to zero
+enum COMPARE_FLAG {LESS = -1, EQUAL, GREATER}; // Flags that returns compare function
+static const double NEAR_ZERO = 1e-6; // The biggest value that will be rounded to zero
 
 
-double get_discriminant(double a, double b, double c);
-int compare(double a, double b);
+static double get_discriminant(double a, double b, double c);
+static int compare(double a, double b);
 
 
 /* Calculates discriminant */
 double get_discriminant(double a, double b, double c) {
-    return pow(b, 2) - 4 * a * c;
+    return b * b - 4 * a * c;
 }
 
 
@@ -21,10 +22,10 @@ Solution get_solution(double a, double b, double c) {
     Solution result = {0, 0, 0};
 
     // in case 'a' equals zero
-    if (compare(a, 0.0) == 0) {
+    if (compare(a, 0.0) == EQUAL) {
 
         // in case 'b' equals zero
-        if (compare(b, 0.0) == 0)
+        if (compare(b, 0.0) == EQUAL)
             result = {-1, 0, 0};
         // linear function
         else
@@ -37,9 +38,9 @@ Solution get_solution(double a, double b, double c) {
     double d = get_discriminant(a, b, c);
 
     // check discriminant
-    if (compare(d, 0.0) == 1)
+    if (compare(d, 0.0) == GREATER)
         result = {2, (-b + d) / (2 * a), (-b - d) / (2 * a)};
-    else if (compare(d, 0.0) == 0)
+    else if (compare(d, 0.0) == EQUAL)
         result = {1, -b / (2 * a), 0};
     
     // return
@@ -47,11 +48,11 @@ Solution get_solution(double a, double b, double c) {
 }
 
 
-// if a > b returns 1, if a == b returns 0, if a < b returns -1, 
+/* Compares two digits */
 int compare(double a, double b) {
     if ((a - b) > NEAR_ZERO)
-        return 1;
+        return GREATER;
     else if ((a - b) < -NEAR_ZERO)
-        return -1;
-    return 0;
+        return LESS;
+    return EQUAL;
 }
