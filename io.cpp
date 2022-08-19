@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <float.h>
 #include <assert.h>
-#include "quadratic.h"
+#include "header.h"
 
 
 int is_OK(double n);

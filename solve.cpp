@@ -1,4 +1,4 @@
-#include "quadratic.h"
+#include "header.h"
 
 
 enum COMPARE_FLAGS {LESS = -1, EQUAL, GREATER}; // Flags that returns compare function

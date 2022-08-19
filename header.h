@@ -14,7 +14,6 @@ typedef struct Solution {
 } Solution;
 
 
-
 // Global functions
 
 int input(double *a, double *b, double *c);
