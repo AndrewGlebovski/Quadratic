@@ -16,7 +16,7 @@ typedef struct Solution {
 
 // Global functions
 
-int input(double *a, double *b, double *c);
+void input(double *a, double *b, double *c);
 void output(Solution result);
 
 Solution solve_quadratic(double a, double b, double c);

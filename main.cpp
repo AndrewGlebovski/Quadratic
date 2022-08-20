@@ -6,8 +6,7 @@ int main() {
     double a = NAN, b = NAN, c = NAN;
 
     // read params
-    if (input(&a, NULL, &c) != 0)
-        return 0;
+    input(&a, &b, &c);
 
     // calculate result
     Solution result = solve_quadratic(a, b, c);
