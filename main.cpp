@@ -6,7 +6,7 @@ int main() {
     double a = NAN, b = NAN, c = NAN;
 
     // read params
-    if (input(&a, &b, &c) != 0)
+    if (input(&a, NULL, &c) != 0)
         return 0;
 
     // calculate result

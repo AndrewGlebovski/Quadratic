@@ -4,14 +4,14 @@
 #include "header.h"
 
 
-int is_OK(double n);
+int is_bounded(double n);
 
 
 /* Gets input */
 int input(double *a, double *b, double *c) {
     // NULL pointer args check
     if (!(a && b && c)) {
-        printf("Pointers are not correct\n");
+        printf("Some arguments were NULL pointers\n");
         return 1;
     }
 
@@ -19,15 +19,21 @@ int input(double *a, double *b, double *c) {
     printf("Pass parameters this way: -1.5 2 20.25\n");
     int n = scanf("%lf %lf %lf", a, b, c);
 
-    // input check
+    // input type check
     if (n != 3) {
-        printf("Incorrect input\n");
+        printf("Incorrect input. Pass numbers only\n");
         return 1;
     }
     
-    // value check
-    if (!(is_OK(*a) && is_OK(*b) && is_OK(*c))) {
-        printf("Value is not correct\n");
+    // bound check
+    if (!(is_bounded(*a) && is_bounded(*b) && is_bounded(*c))) {
+        printf("Number is too big\n");
+        return 1;
+    }
+
+    // smart check
+    if (fabs(*b) > sqrt(DBL_MAX) || 4 * (*a) * (*c) > DBL_MAX) {
+        printf("Quadratic expression will be too big\n");
         return 1;
     }
 
@@ -58,7 +64,7 @@ void output(Solution result) {
 
 
 /* Checks number */
-int is_OK(double n) {
+int is_bounded(double n) {
     // assert
     assert(isfinite(n) && "Number is infinite");
     // size check
