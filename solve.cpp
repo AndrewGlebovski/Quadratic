@@ -10,23 +10,31 @@
 
 /// Отражает результат сравнения двух чисел
 enum COMPARE_RESULT {
-    LESS = -1, ///< Первое число меньше второго
-    EQUAL = 0, ///< Первое число равно второму
-    GREATER = 1 ///< Первое число больше второго
+    LESS    = -1, ///< Первое число меньше второго
+    EQUAL   =  0, ///< Первое число равно второму
+    GREATER =  1  ///< Первое число больше второго
 };
 
 /// Наибольшее значение, котороое будет округляться до нуля
 static const double NEAR_ZERO = 1e-6;
 
-static double get_discriminant(double a, double b, double c);
+
+/** 
+ * \brief Сравнивает два вещественных числа
+ * \param a,b Два вещественных числа
+ * \return Результат сравнения (Смотри COMPARE_RESULT)
+*/
 static int compare(double a, double b);
 
 
 /** 
- * \brief Решает квадратное уравнение 
- * \param a,b,c Коэффициенты квадратного уравнения
- * \return Решение в виде структуры Solution
+ * \brief Подсчитывает дискриминант
+ * \param a,b,с Коэффициенты квадратного уравнения
+ * \return Значение дискриминанта
 */
+static double get_discriminant(double a, double b, double c);
+
+
 Solution solve_quadratic(double a, double b, double c) {
     // in case 'a' equals zero
     if (compare(a, 0.0) == EQUAL)
@@ -49,11 +57,6 @@ Solution solve_quadratic(double a, double b, double c) {
 }
 
 
-/** 
- * \brief Решает линейное уравнение 
- * \param k,b Коэффициенты линейного уравнения
- * \return Решение в виде структуры Solution
-*/
 Solution solve_linear(double k, double b) {
     // init result
     Solution result = {NO_SOLUTIONS, NAN, NAN};
@@ -67,11 +70,6 @@ Solution solve_linear(double k, double b) {
 }
 
 
-/** 
- * \brief Сравнивает два вещественных числа
- * \param a,b Два вещественных числа
- * \return Результат сравнения (Смотри COMPARE_RESULT)
-*/
 int compare(double a, double b) {
     if ((a - b) > NEAR_ZERO)
         return GREATER;
@@ -81,11 +79,6 @@ int compare(double a, double b) {
 }
 
 
-/** 
- * \brief Подсчитывает дискриминант
- * \param a,b,с Коэффициенты квадратного уравнения
- * \return Значение дискриминанта
-*/
 double get_discriminant(double a, double b, double c) {
     return b * b - 4 * a * c;
 }

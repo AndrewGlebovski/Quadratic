@@ -10,14 +10,12 @@
 #include <math.h>
 
 
-/**
- * \brief Описывает состояние решения
-*/
+/// Описывает состояние решения
 enum SOLUTION_STATUS {
-    ERROR = -1, ///< Найти корни не удалось из-за математической ошибки
-    NO_SOLUTIONS = 0, ///< У этого уравнения нет корней
-    ONE_SOLUTION = 1, ///< У этого уравнения один корень
-    TWO_SOLUTIONS = 2 ///< У этого уравнения два корня
+    ERROR         = -1, ///< Найти корни не удалось из-за математической ошибки
+    NO_SOLUTIONS  =  0, ///< У этого уравнения нет корней
+    ONE_SOLUTION  =  1, ///< У этого уравнения один корень
+    TWO_SOLUTIONS =  2  ///< У этого уравнения два корня
 };
 
 
@@ -33,8 +31,36 @@ typedef struct solution {
 } Solution;
 
 
+/**
+ * \brief Функция ввода
+ * \warning В функции используется assert. Неправильный ввод завершит программу
+ * \param a,b,c Указатели на double
+ * 
+ * Эта функция обрабатывает ввод коэффициентов и осуществляет его проверку
+*/
 void input(double *a, double *b, double *c);
+
+
+/**
+ * \brief Функция вывода
+ * \param result Структура Solution
+ * 
+ * Эта функция обрабатывает вывод результата вычисления
+*/
 void output(Solution result);
 
+
+/** 
+ * \brief Решает квадратное уравнение 
+ * \param a,b,c Коэффициенты квадратного уравнения
+ * \return Решение в виде структуры Solution
+*/
 Solution solve_quadratic(double a, double b, double c);
+
+
+/** 
+ * \brief Решает линейное уравнение 
+ * \param k,b Коэффициенты линейного уравнения
+ * \return Решение в виде структуры Solution
+*/
 Solution solve_linear(double k, double b);

@@ -9,16 +9,17 @@
 #include "header.h"
 
 
+/**
+ * \brief Функция проверки границ значения
+ * \warning В функции используется assert. Значение равное бесконечности завершит программу
+ * \param n Вещественное число
+ * \return 0 или 1, если число находится в границах разумного
+ * 
+ * Эта функция проверяет размер введенного значения и сравнивает его с DBL_MAX
+*/
 static int is_bounded(double n);
 
 
-/**
- * \brief Функция ввода
- * \warning В функции используется assert. Неправильный ввод завершит программу
- * \param a,b,c Указатели на double
- * 
- * Эта функция обрабатывает ввод коэффициентов и осуществляет его проверку
-*/
 void input(double *a, double *b, double *c) {
     // NULL pointer args check
     assert((a && b && c) && "An argument is a NULL pointer");
@@ -38,12 +39,6 @@ void input(double *a, double *b, double *c) {
 }
 
 
-/**
- * \brief Функция вывода
- * \param result Структура Solution
- * 
- * Эта функция обрабатывает вывод результата вычисления
-*/
 void output(Solution result) {
     switch (result.status) {
         case TWO_SOLUTIONS:
@@ -65,14 +60,6 @@ void output(Solution result) {
 }
 
 
-/**
- * \brief Функция проверки границ значения
- * \warning В функции используется assert. Значение равное бесконечности завершит программу
- * \param n Вещественное число
- * \return 0 или 1, если число находится в границах разумного
- * 
- * Эта функция проверяет размер введенного значения и сравнивает его с DBL_MAX
-*/
 int is_bounded(double n) {
     // assert
     assert(isfinite(n) && "Number is infinite");
