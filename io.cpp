@@ -1,13 +1,22 @@
+/**
+ * \file
+ * \brief В этом файле осуществляется ввод и вывод, а также проверка входных данных
+*/
+
 #include <stdio.h>
 #include <float.h>
 #include <assert.h>
 #include "header.h"
 
 
-int is_bounded(double n);
+static int is_bounded(double n);
 
 
-/* Gets input */
+/**
+    \brief Функция ввода
+
+    Эта функция обрабатывает ввод коэффициентов
+*/
 void input(double *a, double *b, double *c) {
     // NULL pointer args check
     assert((a && b && c) && "An argument is a NULL pointer");
@@ -27,9 +36,13 @@ void input(double *a, double *b, double *c) {
 }
 
 
-/* Prints result */
+/**
+    \brief Функция вывода
+
+    Эта функция обрабатывает вывод результата вычисления
+*/
 void output(Solution result) {
-    switch (result.n) {
+    switch (result.status) {
         case TWO_SOLUTIONS:
             printf("x1 = %f, x2 = %f\n", result.x1, result.x2);
             break;
@@ -49,7 +62,11 @@ void output(Solution result) {
 }
 
 
-/* Checks number */
+/**
+    \brief Функция проверки границ значения
+
+    Эта функция проверяет размер введенного значения и сравнивает его с DBL_MAX
+*/
 int is_bounded(double n) {
     // assert
     assert(isfinite(n) && "Number is infinite");

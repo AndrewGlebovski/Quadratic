@@ -1,15 +1,32 @@
+/**
+ * \file
+ * \brief Содержит решения уравнений
+ * 
+ * Этот файл содержит функции для решения квадратных и линейных уравнений, а также вспомогательную функцию сравнения двух вещественных чисел
+*/
+
 #include "header.h"
 
 
-enum COMPARE_FLAGS {LESS = -1, EQUAL, GREATER}; // Flags that returns compare function
-static const double NEAR_ZERO = 1e-6; // The biggest value that will be rounded to zero
+/// Отражает результат сравнения двух чисел
+enum COMPARE_RESULT {
+    LESS = -1, ///< Первое число меньше второго
+    EQUAL = 0, ///< Первое число равно второму
+    GREATER = 1 ///< Первое число больше второго
+};
 
+/// Наибольшее значение, котороое будет округляться до нуля
+static const double NEAR_ZERO = 1e-6;
 
 static double get_discriminant(double a, double b, double c);
 static int compare(double a, double b);
 
 
-/* Solves a quadratic equation */
+/** 
+ * \brief Решает квадратное уравнение 
+ * \param a,b,c Коэффициенты квадратного уравнения
+ * \return Решение в виде структуры Solution
+*/
 Solution solve_quadratic(double a, double b, double c) {
     // in case 'a' equals zero
     if (compare(a, 0.0) == EQUAL)
@@ -32,7 +49,11 @@ Solution solve_quadratic(double a, double b, double c) {
 }
 
 
-/* Solves a linear equation */
+/** 
+ * \brief Решает линейное уравнение 
+ * \param k,b Коэффициенты линейного уравнения
+ * \return Решение в виде структуры Solution
+*/
 Solution solve_linear(double k, double b) {
     // init result
     Solution result = {NO_SOLUTIONS, NAN, NAN};
@@ -46,7 +67,11 @@ Solution solve_linear(double k, double b) {
 }
 
 
-/* Compares two numbers */
+/** 
+ * \brief Сравнивает два вещественных числа
+ * \param a,b Два вещественных числа
+ * \return Результат сравнения (Смотри COMPARE_RESULT)
+*/
 int compare(double a, double b) {
     if ((a - b) > NEAR_ZERO)
         return GREATER;
@@ -56,7 +81,11 @@ int compare(double a, double b) {
 }
 
 
-/* Calculates discriminant */
+/** 
+ * \brief Подсчитывает дискриминант
+ * \param a,b,с Коэффициенты квадратного уравнения
+ * \return Значение дискриминанта
+*/
 double get_discriminant(double a, double b, double c) {
     return b * b - 4 * a * c;
 }
