@@ -1,17 +1,13 @@
 /**
  * \file
- * \brief Этот файл содержит только функцию main()
- * 
- * Именно этот файл из кучки разрозненных функций порождает настоящую программу
+ * \brief This file contains only the main() function
 */
 
 #include "header.h"
 
 
 /**
- * \brief Основная функция программы
- * 
- * С неё все начинается, ей все заканчивается
+ * \brief The main function of the program
 */
 int main() {
     // init params

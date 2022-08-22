@@ -1,36 +1,36 @@
 /**
  * \file
- * \brief Содержит решения уравнений
+ * \brief This file contains solutions to equations
  * 
- * Этот файл содержит функции для решения квадратных и линейных уравнений, а также вспомогательную функцию сравнения двух вещественных чисел
+ * This file contains functions for solving quadratic and linear equations, and tool function for comparing two real numbers.
 */
 
 #include "header.h"
 
 
-/// Отражает результат сравнения двух чисел
+/// Shows the result of comparing two numbers
 enum COMPARE_RESULT {
-    LESS    = -1, ///< Первое число меньше второго
-    EQUAL   =  0, ///< Первое число равно второму
-    GREATER =  1  ///< Первое число больше второго
+    LESS    = -1, ///< The first number is less than the second
+    EQUAL   =  0, ///< The first number is equal to the second
+    GREATER =  1  ///< The first number is greater than the second
 };
 
-/// Наибольшее значение, котороое будет округляться до нуля
+/// The largest value that will be rounded down to zero
 static const double NEAR_ZERO = 1e-6;
 
 
 /** 
- * \brief Сравнивает два вещественных числа
- * \param a,b Два вещественных числа
- * \return Результат сравнения (Смотри COMPARE_RESULT)
+ * \brief Compares two real numbers
+ * \param a,b Two real numbers
+ * \return Comparison result (see #COMPARE_RESULT)
 */
 static int compare(double a, double b);
 
 
 /** 
- * \brief Подсчитывает дискриминант
- * \param a,b,с Коэффициенты квадратного уравнения
- * \return Значение дискриминанта
+ * \brief Calculates the discriminant
+ * \param a,b,с Coefficients of a quadratic equation
+ * \return Discriminant value
 */
 static double get_discriminant(double a, double b, double c);
 
