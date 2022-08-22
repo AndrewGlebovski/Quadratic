@@ -3,7 +3,7 @@
  * \brief This file contains only the main() function
 */
 
-#include "header.h"
+#include "header.hpp"
 
 
 /**

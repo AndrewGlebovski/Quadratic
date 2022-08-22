@@ -5,7 +5,7 @@
  * This file contains functions for solving quadratic and linear equations, and tool function for comparing two real numbers.
 */
 
-#include "header.h"
+#include "header.hpp"
 
 
 /// Shows the result of comparing two numbers
