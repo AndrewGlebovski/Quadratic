@@ -48,9 +48,17 @@ Solution solve_quadratic(double a, double b, double c) {
 
     // check discriminant
     if (compare(d, 0.0) == GREATER)
-        result = {TWO_SOLUTIONS, (-b + d) / (2 * a), (-b - d) / (2 * a)};
+        result = {
+            TWO_SOLUTIONS, 
+            (-b + d) / (2 * a), 
+            (-b - d) / (2 * a)
+        };
     else if (compare(d, 0.0) == EQUAL)
-        result = {ONE_SOLUTION, -b / (2 * a), NAN};
+        result = {
+            ONE_SOLUTION, 
+            -b / (2 * a), 
+            NAN
+        };
     
     // return
     return result;
