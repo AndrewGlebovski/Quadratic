@@ -1,6 +1,6 @@
 /**
  * \file
- * \brief В этом файле осуществляется ввод и вывод
+ * \brief This file handles input and output.
 */
 
 #include <stdio.h>
@@ -10,12 +10,12 @@
 
 
 /**
- * \brief Функция проверки границ значения
- * \warning В функции используется assert. Значение равное бесконечности завершит программу
- * \param n Вещественное число
- * \return 0 или 1, если число находится в границах разумного
+ * \brief Function to check the bounds of a variable
+ * \warning The function uses assert(). A value equal to infinity will terminate the program
+ * \param n Real number
+ * \return 1 or 0,  if the number is in bounds
  * 
- * Эта функция проверяет размер введенного значения и сравнивает его с DBL_MAX
+ * This function checks the size of the entered value and compares it with DBL_MAX
 */
 static int is_bounded(double n);
 
