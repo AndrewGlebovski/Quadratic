@@ -28,35 +28,36 @@ typedef struct solution {
 
 
 /**
- * \brief Input function
- * \warning The function uses assert(). Wrong input will terminate the program
- * \param a,b,c Pointers to double
- * 
- * This function gets coefficients and checks them.
+ * \brief Scans the coefficients
+ * \param [in] a Coefficient before x^2
+ * \param [in] b Coefficient before x
+ * \param [in] c Free coefficient
+ * \return Exit code (see #EXIT_CODE)
 */
-void input(double *a, double *b, double *c);
+int input(double *a, double *b, double *c);
 
 
 /**
- * \brief Output function
- * \param result #Solution to print
- * 
- * This function prints the solution
+ * \brief Prints the solution
+ * \param [in] result That will be printed (see #Solution)
 */
 void output(Solution result);
 
 
 /** 
  * \brief Solves a quadratic equation
- * \param a,b,c Coefficients of a quadratic equation
- * \return Result as a #Solution structure
+ * \param [in] a Coefficient before x^2
+ * \param [in] b Coefficient before x
+ * \param [in] c Free coefficient
+ * \return Solution (see #Solution)
 */
 Solution solve_quadratic(double a, double b, double c);
 
 
 /** 
  * \brief Solves a linear equation
- * \param k,b Coefficients of a linear equation
- * \return Result as a #Solution structure
+ * \param [in] k Coefficient before x
+ * \param [in] b Free coefficient
+ * \return Solution (see #Solution)
 */
 Solution solve_linear(double k, double b);

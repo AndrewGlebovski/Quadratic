@@ -20,8 +20,9 @@ static const double NEAR_ZERO = 1e-6;
 
 
 /** 
- * \brief Compares two real numbers
- * \param a,b Two real numbers
+ * \brief Compares two double numbers
+ * \param [in] a The first number to compare
+ * \param [in] b The second number to compare
  * \return Comparison result (see #COMPARE_RESULT)
 */
 static int compare(double a, double b);
@@ -29,7 +30,9 @@ static int compare(double a, double b);
 
 /** 
  * \brief Calculates the discriminant
- * \param a,b,с Coefficients of a quadratic equation
+ * \param [in] a Coefficient before x^2
+ * \param [in] b Coefficient before x
+ * \param [in] c Free coefficient
  * \return Discriminant value
 */
 static double get_discriminant(double a, double b, double c);

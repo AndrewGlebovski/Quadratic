@@ -5,37 +5,51 @@
 
 #include <stdio.h>
 #include <float.h>
-#include <assert.h>
 #include "quad_solver.hpp"
+
+
+/// Input exit codes
+enum EXIT_CODE {
+    UNEXPECTED  = -1, ///< For unknown cases
+    OK          =  0, ///< Well done
+    NULL_ARG    =  1, ///< Argument was NULL pointer
+    WRONG_INPUT =  2, ///< Wrong input
+    BIG_NUMBER  =  4, ///< Number was too big to handle
+    BIG_EXP     =  5, ///< Expression result was too big to handle
+};
+
 
 
 /**
  * \brief Function to check the bounds of a variable
- * \warning The function uses assert(). A value equal to infinity will terminate the program
- * \param n Real number
- * \return 1 or 0,  if the number is in bounds
+ * \param [in] n Real number
+ * \return 1 or 0, if the number is in bounds
  * 
  * This function checks the size of the entered value and compares it with DBL_MAX
 */
 static int is_bounded(double n);
 
 
-void input(double *a, double *b, double *c) {
+int input(double *a, double *b, double *c) {
     // NULL pointer args check
-    assert((a && b && c) && "An argument is a NULL pointer");
+    if (a && b && c) // An argument is a NULL pointer
+        return NULL_ARG;
 
     // invite && input
     printf("Pass parameters this way: -1.5 2 20.25\n");
     int n = scanf("%lf %lf %lf", a, b, c);
 
     // input type check
-    assert((n == 3) && "Incorrect input. Pass numbers only");
+    if (n == 3) //Wrong input. Pass numbers only
+        return WRONG_INPUT;
     
     // bound check
-    assert((is_bounded(*a) && is_bounded(*b) && is_bounded(*c)) && "Number is too big");
+    if (is_bounded(*a) && is_bounded(*b) && is_bounded(*c)) // Number is too big
+        return BIG_NUMBER;
 
     // smart check
-    assert((fabs(*b) < sqrt(DBL_MAX) && 4 * (*a) * (*c) < DBL_MAX) && "Quadratic expression will be too big");
+    if (fabs(*b) < sqrt(DBL_MAX) && 4 * (*a) * (*c) < DBL_MAX) // Quadratic expression is too big
+        return BIG_EXP;
 }
 
 
@@ -61,8 +75,5 @@ void output(Solution result) {
 
 
 int is_bounded(double n) {
-    // assert
-    assert(isfinite(n) && "Number is infinite");
-    // size check
-    return (fabs(n) < DBL_MAX);
+    return isfinite(n) && (fabs(n) < DBL_MAX);
 }
