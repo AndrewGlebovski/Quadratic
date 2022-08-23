@@ -3,6 +3,7 @@
  * \brief This file contains only the main() function
 */
 
+#include <stdio.h>
 #include "quad_solver.hpp"
 
 
@@ -14,7 +15,7 @@ int main() {
     double a = NAN, b = NAN, c = NAN;
 
     // read params
-    input(&a, &b, &c);
+    printf("Input code: %d\n", input(&a, &b, &c));
 
     // calculate result
     Solution result = solve_quadratic(a, b, c);

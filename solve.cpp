@@ -43,10 +43,10 @@ Solution solve_quadratic(double a, double b, double c) {
     if (compare(a, 0.0) == EQUAL)
         return solve_linear(b, c);
 
-    double d = get_discriminant(a, b, c);
+    double d = sqrt(get_discriminant(a, b, c));
 
     // init result
-    Solution result = {NO_SOLUTIONS, NAN, NAN};
+    Solution result = {INIT, NAN, NAN};
     a *= 2;
 
     // check discriminant
@@ -69,7 +69,7 @@ Solution solve_quadratic(double a, double b, double c) {
 
 Solution solve_linear(double k, double b) {
     // init result
-    Solution result = {NO_SOLUTIONS, NAN, NAN};
+    Solution result = {INIT, NAN, NAN};
 
     if (compare(k, 0.0) == EQUAL)
         result = {ERROR, NAN, NAN}; // in case 'k' equals zero

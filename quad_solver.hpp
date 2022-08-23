@@ -8,13 +8,26 @@
 #include <math.h>
 
 
+/// Input exit codes
+typedef enum INPUT_EXIT_CODE {
+    UNEXPECTED  = -1, ///< For unknown cases
+    OK          =  0, ///< Well done
+    NULL_ARG    =  1, ///< Argument was NULL pointer
+    WRONG_INPUT =  2, ///< Wrong input
+    BIG_NUMBER  =  4, ///< Number was too big to handle
+    BIG_EXP     =  5, ///< Expression result was too big to handle
+} INPUT_EXIT_CODE;
+
+
 /// Shows solution status
-enum SOLUTION_STATUS {
+typedef enum SOLUTION_STATUS {
     ERROR         = -1, ///< Solutions could not be found cause of a math error
     NO_SOLUTIONS  =  0, ///< This equation has no solutions.
     ONE_SOLUTION  =  1, ///< This equation has one solution.
-    TWO_SOLUTIONS =  2  ///< This equation has two solutions.
-};
+    TWO_SOLUTIONS =  2, ///< This equation has two solutions.
+    INF_SOLUTIONS =  3, ///< This equation has infinite number of solutions
+    INIT          =  4, ///< Has been just initialized
+} SOLUTION_STATUS;
 
 
 /**
@@ -34,7 +47,7 @@ typedef struct solution {
  * \param [in] c Free coefficient
  * \return Exit code (see #EXIT_CODE)
 */
-int input(double *a, double *b, double *c);
+INPUT_EXIT_CODE input(double *a, double *b, double *c);
 
 
 /**
