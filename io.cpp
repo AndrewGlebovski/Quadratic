@@ -6,7 +6,7 @@
 #include <stdio.h>
 #include <float.h>
 #include <assert.h>
-#include "header.hpp"
+#include "quad_solver.hpp"
 
 
 /**

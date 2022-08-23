@@ -3,7 +3,7 @@
  * \brief This file contains only the main() function
 */
 
-#include "header.hpp"
+#include "quad_solver.hpp"
 
 
 /**
@@ -21,7 +21,6 @@ int main() {
 
     // print result
     output(result);
-    
-    // return
+
     return 0;
 }

@@ -5,7 +5,7 @@
  * This file contains functions for solving quadratic and linear equations, and tool function for comparing two real numbers.
 */
 
-#include "header.hpp"
+#include "quad_solver.hpp"
 
 
 /// Shows the result of comparing two numbers
@@ -40,27 +40,26 @@ Solution solve_quadratic(double a, double b, double c) {
     if (compare(a, 0.0) == EQUAL)
         return solve_linear(b, c);
 
-    // get discriminant
     double d = get_discriminant(a, b, c);
 
     // init result
     Solution result = {NO_SOLUTIONS, NAN, NAN};
+    a *= 2;
 
     // check discriminant
     if (compare(d, 0.0) == GREATER)
         result = {
             TWO_SOLUTIONS, 
-            (-b + d) / (2 * a), 
-            (-b - d) / (2 * a)
+            (-b + d) / a, 
+            (-b - d) / a,
         };
     else if (compare(d, 0.0) == EQUAL)
         result = {
             ONE_SOLUTION, 
-            -b / (2 * a), 
+            -b / a,
             NAN
         };
     
-    // return
     return result;
 }
 
