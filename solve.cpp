@@ -43,25 +43,30 @@ Solution solve_quadratic(double a, double b, double c) {
     if (compare(a, 0.0) == EQUAL)
         return solve_linear(b, c);
 
-    double d = sqrt(get_discriminant(a, b, c));
+    double d = get_discriminant(a, b, c);
 
     // init result
     Solution result = {INIT, NAN, NAN};
     a *= 2;
 
     // check discriminant
-    if (compare(d, 0.0) == GREATER)
+    if (compare(d, 0.0) == GREATER) {
+        d = sqrt(d);
+
         result = {
             TWO_SOLUTIONS, 
             (-b + d) / a, 
             (-b - d) / a,
         };
+    }
     else if (compare(d, 0.0) == EQUAL)
         result = {
             ONE_SOLUTION, 
             -b / a,
             NAN
         };
+    else
+        result.status = NO_SOLUTIONS;
     
     return result;
 }
@@ -80,7 +85,7 @@ Solution solve_linear(double k, double b) {
 }
 
 
-int compare(double a, double b) {
+static int compare(double a, double b) {
     if ((a - b) > NEAR_ZERO)
         return GREATER;
     else if ((a - b) < -NEAR_ZERO)
@@ -89,6 +94,6 @@ int compare(double a, double b) {
 }
 
 
-double get_discriminant(double a, double b, double c) {
+static double get_discriminant(double a, double b, double c) {
     return b * b - 4 * a * c;
 }

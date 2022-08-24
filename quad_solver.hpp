@@ -1,10 +1,11 @@
 /**
  * \file
- * \brief This is a header file
+ * \brief This is a header stream
  * 
  * Included in every project script
 */
 
+#include <stdio.h>
 #include <math.h>
 
 
@@ -42,19 +43,21 @@ typedef struct solution {
 
 /**
  * \brief Scans the coefficients
+ * \param [out] stream Input will be taken from this file
  * \param [in] a Coefficient before x^2
  * \param [in] b Coefficient before x
  * \param [in] c Free coefficient
- * \return Exit code (see #EXIT_CODE)
+ * \return Exit code (see #INPUT_EXIT_CODE)
 */
-INPUT_EXIT_CODE input(double *a, double *b, double *c);
+INPUT_EXIT_CODE input(FILE *stream, double *a, double *b, double *c);
 
 
 /**
  * \brief Prints the solution
+ * \param [out] stream Output will be printed to this file
  * \param [in] result That will be printed (see #Solution)
 */
-void output(Solution result);
+void output(FILE *stream, Solution result);
 
 
 /** 

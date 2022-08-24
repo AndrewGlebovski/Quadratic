@@ -1,9 +1,8 @@
 /**
  * \file
- * \brief This file handles input and output.
+ * \brief This stream handles input and output.
 */
 
-#include <stdio.h>
 #include <float.h>
 #include "quad_solver.hpp"
 
@@ -18,14 +17,15 @@
 static int is_bounded(double n);
 
 
-INPUT_EXIT_CODE input(double *a, double *b, double *c) {
+INPUT_EXIT_CODE input(FILE *stream, double *a, double *b, double *c) {
     // NULL pointer args check
     if ((a && b && c) == 0) // An argument is a NULL pointer
         return NULL_ARG;
 
     // invite && input
-    printf("Pass parameters this way: -1.5 2 20.25\n");
-    int n = scanf("%lf %lf %lf", a, b, c);
+    if (stream==stdin) // invite only requires in stdin
+        printf("Pass parameters this way: -1.5 2 20.25\n");
+    int n = fscanf(stream, "%lf %lf %lf", a, b, c);
 
     // input type check
     if (n != 3) //Wrong input. Pass numbers only
@@ -43,26 +43,25 @@ INPUT_EXIT_CODE input(double *a, double *b, double *c) {
 }
 
 
-void output(Solution result) {
+void output(FILE* stream, Solution result) {
     switch (result.status) {
         case TWO_SOLUTIONS:
-            printf("x1 = %f, x2 = %f\n", result.x1, result.x2);
+            fprintf(stream, "x1 = %f, x2 = %f\n", result.x1, result.x2);
             break;
         case ONE_SOLUTION:
-            printf("x = %f\n", result.x1);
+            fprintf(stream, "x = %f\n", result.x1);
             break;
         case NO_SOLUTIONS:
-            printf("No solutions... sad\n");
+            fprintf(stream, "No solutions\n");
             break;
         case ERROR:
-            printf("Math error\n");
+            fprintf(stream, "Math error\n");
             break;
         case INIT:
-            printf("Remain unsolved for some reason\n");
+            fprintf(stream, "Not used\n");
             break;
-            
         default:
-            printf("WTF\n");
+            fprintf(stream, "WTF\n");
             break;
     }
 }
