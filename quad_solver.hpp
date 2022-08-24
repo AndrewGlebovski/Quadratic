@@ -1,23 +1,25 @@
 /**
  * \file
- * \brief This is a header stream
+ * \brief This is a header file
  * 
- * Included in every project script
+ * It's included in every project script
 */
 
 #include <stdio.h>
 #include <math.h>
 
 
-/// Input exit codes
-typedef enum INPUT_EXIT_CODE {
+/// Exit codes
+typedef enum EXIT_CODE {
     UNEXPECTED  = -1, ///< For unknown cases
     OK          =  0, ///< Well done
     NULL_ARG    =  1, ///< Argument was NULL pointer
     WRONG_INPUT =  2, ///< Wrong input
     BIG_NUMBER  =  4, ///< Number was too big to handle
     BIG_EXP     =  5, ///< Expression result was too big to handle
-} INPUT_EXIT_CODE;
+    NO_FILE     =  6, ///< File not found
+    EXE_FAIL    =  7  ///< File executed with incorrect arguments
+} EXIT_CODE;
 
 
 /// Shows solution status
@@ -43,18 +45,18 @@ typedef struct solution {
 
 /**
  * \brief Scans the coefficients
- * \param [out] stream Input will be taken from this file
+ * \param [in] stream Input will be taken from this file
  * \param [in] a Coefficient before x^2
  * \param [in] b Coefficient before x
  * \param [in] c Free coefficient
- * \return Exit code (see #INPUT_EXIT_CODE)
+ * \return Exit code (see #EXIT_CODE)
 */
-INPUT_EXIT_CODE input(FILE *stream, double *a, double *b, double *c);
+EXIT_CODE input(FILE *stream, double *a, double *b, double *c);
 
 
 /**
  * \brief Prints the solution
- * \param [out] stream Output will be printed to this file
+ * \param [in] stream Output will be printed to this file
  * \param [in] result That will be printed (see #Solution)
 */
 void output(FILE *stream, Solution result);

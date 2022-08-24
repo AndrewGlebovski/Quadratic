@@ -17,13 +17,13 @@
 static int is_bounded(double n);
 
 
-INPUT_EXIT_CODE input(FILE *stream, double *a, double *b, double *c) {
+EXIT_CODE input(FILE *stream, double *a, double *b, double *c) {
     // NULL pointer args check
     if ((a && b && c) == 0) // An argument is a NULL pointer
         return NULL_ARG;
 
     // invite && input
-    if (stream==stdin) // invite only requires in stdin
+    if (stream == stdin) // invite only requires in stdin
         printf("Pass parameters this way: -1.5 2 20.25\n");
     int n = fscanf(stream, "%lf %lf %lf", a, b, c);
 

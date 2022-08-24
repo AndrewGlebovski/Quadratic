@@ -12,23 +12,36 @@
  * \param [in] argv Array of strings
  * \param [out] in_stream Input file pointer
  * \param [out] out_stream Output file pointer
+ * \result Exit code (see #EXIT_CODE)
 */
-static int read_args(int argc, char *argv[], FILE **in_stream, FILE **out_stream);
+static EXIT_CODE read_args(int argc, char *argv[], FILE **in_stream, FILE **out_stream);
 
 
-/// The main function of the program
+/** 
+ * \brief The main function of the program
+ * 
+ * \note Possible commnad line arguments:
+ * \note -i "filename" Changes input stream to the given file
+ * \note -o "filename" Changes output stream to the given file
+ * 
+ * \warning In case of wrong arguments, program will close
+*/
 int main(int argc, char *argv[]) {
     FILE *in_stream = stdin, *out_stream = stdout;
 
-    read_args(argc, argv, &in_stream, &out_stream);
+    int exit_code = read_args(argc, argv, &in_stream, &out_stream);
+    if (exit_code != OK) {
+        fprintf(out_stream, "Argument reader failed with exit code %d\n", exit_code);
+        return 1;
+    }
 
     // init params
     double a = NAN, b = NAN, c = NAN;
 
     // read params
-    INPUT_EXIT_CODE input_code = input(in_stream, &a, &b, &c);
-    if (input_code != OK) {
-        fprintf(out_stream, "Input failed with exit code %d\n", input_code);
+    exit_code  = input(in_stream, &a, &b, &c);
+    if (exit_code != OK) {
+        fprintf(out_stream, "Input failed with exit code %d\n", exit_code);
         return 1;
     }
 
@@ -46,39 +59,25 @@ int main(int argc, char *argv[]) {
 }
 
 
-static int read_args(int argc, char *argv[], FILE **in_stream, FILE **out_stream) {
+static EXIT_CODE read_args(int argc, char *argv[], FILE **in_stream, FILE **out_stream) {
     while(argc--) {
-        // input argument
+        // input stream
         if (strcmp(*argv, "-i") == 0) {
-            if (!(argv++)) {
-                printf("Wrong arguments");
-                return 1;
-            }
-
+            argc--, argv++;
             *in_stream = fopen(*argv, "r");
 
-            if (!*in_stream) {
-                printf("Can't open file %s\n", *argv);
-                return 1;
-            }
-
-            argc--;
+            if (!*in_stream)
+                return NO_FILE;
         }
 
-        // output argument
+        // output stream
         if (strcmp(*argv, "-o") == 0) {
-            if (!(argv++)) {
-                printf("Wrong arguments");
-                return 1;
-            }
-
+            argc--, argv++;
             *out_stream = fopen(*argv, "w");
-
-            argc--;
         }
 
         argv++;        
     }
 
-    return 0;
+    return OK;
 }
