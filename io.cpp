@@ -1,6 +1,6 @@
 /**
  * \file
- * \brief This stream handles input and output.
+ * \brief Handles input and output.
 */
 
 #include <float.h>
@@ -46,15 +46,15 @@ EXIT_CODE input(FILE *stream, double *a, double *b, double *c) {
 void output(FILE* stream, Solution result) {
     switch (result.status) {
         case TWO_SOLUTIONS:
-            fprintf(stream, "x1 = %f, x2 = %f\n", result.x1, result.x2);
+            fprintf(stream, "x1 = %lg, x2 = %lg\n", result.x1, result.x2);
             break;
         case ONE_SOLUTION:
-            fprintf(stream, "x = %f\n", result.x1);
+            fprintf(stream, "x = %lg\n", result.x1);
             break;
         case NO_SOLUTIONS:
             fprintf(stream, "No solutions\n");
             break;
-        case ERROR:
+        case MATH_ERROR:
             fprintf(stream, "Math error\n");
             break;
         case INIT:

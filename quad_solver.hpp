@@ -24,7 +24,7 @@ typedef enum EXIT_CODE {
 
 /// Shows solution status
 typedef enum SOLUTION_STATUS {
-    ERROR         = -1, ///< Solutions could not be found cause of a math error
+    MATH_ERROR         = -1, ///< Solutions could not be found cause of a math error
     NO_SOLUTIONS  =  0, ///< This equation has no solutions.
     ONE_SOLUTION  =  1, ///< This equation has one solution.
     TWO_SOLUTIONS =  2, ///< This equation has two solutions.
@@ -33,13 +33,21 @@ typedef enum SOLUTION_STATUS {
 } SOLUTION_STATUS;
 
 
+/// Shows the result of comparing two numbers
+enum COMPARE_RESULT {
+    LESS    = -1, ///< The first number is less than the second
+    EQUAL   =  0, ///< The first number is equal to the second
+    GREATER =  1  ///< The first number is greater than the second
+};
+
+
 /**
- * \brief Contains the solutions of the equation
+ * \brief Contains the roots of the equation
 */
-typedef struct solution {
-    int status;
-    double x1;
-    double x2;
+typedef struct {
+    int status; ///< It's solution status
+    double x1; ///< The first root
+    double x2; ///< The second root
 } Solution;
 
 
@@ -79,3 +87,19 @@ Solution solve_quadratic(double a, double b, double c);
  * \return Solution (see #Solution)
 */
 Solution solve_linear(double k, double b);
+
+
+/** 
+ * \brief Compares two double numbers
+ * \param [in] a The first number to compare
+ * \param [in] b The second number to compare
+ * \return Comparison result (see #COMPARE_RESULT)
+*/
+int compare(double a, double b);
+
+
+/**
+ * \brief Runs array of predefined tests
+ * \return Number of passed tests
+*/
+int run_all_test(void);

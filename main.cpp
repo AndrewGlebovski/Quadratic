@@ -1,6 +1,6 @@
 /**
  * \file
- * \brief This stream contains only the main() function
+ * \brief Contains only two function
 */
 #include <string.h>
 #include "quad_solver.hpp"
@@ -12,7 +12,7 @@
  * \param [in] argv Array of strings
  * \param [out] in_stream Input file pointer
  * \param [out] out_stream Output file pointer
- * \result Exit code (see #EXIT_CODE)
+ * \return Exit code (see #EXIT_CODE)
 */
 static EXIT_CODE read_args(int argc, char *argv[], FILE **in_stream, FILE **out_stream);
 
@@ -23,6 +23,7 @@ static EXIT_CODE read_args(int argc, char *argv[], FILE **in_stream, FILE **out_
  * \note Possible commnad line arguments:
  * \note -i "filename" Changes input stream to the given file
  * \note -o "filename" Changes output stream to the given file
+ * \note -t To run some tests before start
  * 
  * \warning In case of wrong arguments, program will close
 */
@@ -74,6 +75,11 @@ static EXIT_CODE read_args(int argc, char *argv[], FILE **in_stream, FILE **out_
         if (strcmp(*argv, "-o") == 0) {
             argc--, argv++;
             *out_stream = fopen(*argv, "w");
+        }
+
+        // test before start enable
+        if (strcmp(*argv, "-t") == 0) {
+            run_all_test();
         }
 
         argv++;        
