@@ -24,7 +24,7 @@ typedef enum EXIT_CODE {
 
 /// Shows solution status
 typedef enum SOLUTION_STATUS {
-    MATH_ERROR         = -1, ///< Solutions could not be found cause of a math error
+    MATH_ERROR    = -1, ///< Solutions could not be found cause of a math error
     NO_SOLUTIONS  =  0, ///< This equation has no solutions.
     ONE_SOLUTION  =  1, ///< This equation has one solution.
     TWO_SOLUTIONS =  2, ///< This equation has two solutions.
@@ -99,7 +99,8 @@ int compare(double a, double b);
 
 
 /**
- * \brief Runs array of predefined tests
+ * \brief Runs some tests in any case
+ * \param stream If not NULL tests will be readen from this file
  * \return Number of passed tests
 */
-int run_all_test(void);
+int start_testing(FILE *stream);

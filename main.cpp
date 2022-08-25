@@ -7,7 +7,7 @@
 
 
 /**
- * \brief Reads command line arguments
+ * \brief Reads command line arguments 
  * \param [in] argc Amount of arguments
  * \param [in] argv Array of strings
  * \param [out] in_stream Input file pointer
@@ -23,7 +23,8 @@ static EXIT_CODE read_args(int argc, char *argv[], FILE **in_stream, FILE **out_
  * \note Possible commnad line arguments:
  * \note -i "filename" Changes input stream to the given file
  * \note -o "filename" Changes output stream to the given file
- * \note -t To run some tests before start
+ * \note -t Runs some predefined tests before start
+ * \note -ts "filename" Runs some predefined tests before start and tests from the given file 
  * 
  * \warning In case of wrong arguments, program will close
 */
@@ -79,7 +80,14 @@ static EXIT_CODE read_args(int argc, char *argv[], FILE **in_stream, FILE **out_
 
         // test before start enable
         if (strcmp(*argv, "-t") == 0) {
-            run_all_test();
+            start_testing(NULL);
+        }
+
+        // test before start enable from your file
+        if (strcmp(*argv, "-ts") == 0) {
+            argc--, argv++;
+            FILE *test_stream = fopen(*argv, "r");
+            start_testing(test_stream);
         }
 
         argv++;        

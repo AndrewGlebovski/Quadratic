@@ -29,6 +29,14 @@ QuadSolverTest create_test(double a, double b, double c, int status, double x1, 
 
 
 /**
+ * \brief Reads test from file
+ * \param [in] stream To read test
+ * \return Test for solve_quadratic()
+*/
+int read_test(FILE *stream, QuadSolverTest *test);
+
+
+/**
  * \brief Runs test
  * \param [in] test For testing
  * \param [out] msg Test result message
@@ -37,14 +45,44 @@ QuadSolverTest create_test(double a, double b, double c, int status, double x1, 
 int run_test(QuadSolverTest test, char* msg);
 
 
-QuadSolverTest create_test(double a, double b, double c, int status, double x1, double x2){
+/**
+ * \brief Prints test result with index
+ * \param [in] quad_test Test to run
+ * \param [in] test_index Test index
+ * \return 0 if test passed, 1 - otherwise
+*/
+int print_test(QuadSolverTest quad_test, int test_index);
+
+
+QuadSolverTest create_test(double a, double b, double c, int status, double x1, double x2) {
     Solution ans = {status, x1, x2};
     QuadSolverTest new_test = {a, b, c, ans};
     return new_test;
 }
 
 
-int run_test(QuadSolverTest test, char* msg){
+int read_test(FILE *stream, QuadSolverTest *test) {
+    if (!stream) {
+        printf("Stream was NULL\n");
+        return 1;
+    }
+
+    if (!test){
+        printf("Test was NULL\n");
+        return 1;
+    }
+    
+    int n = fscanf(stream, "%lf %lf %lf %d %lf %lf", 
+                &(test->a), &(test->b), &(test->c), &(test->ans.status), &(test->ans.x1), &(test->ans.x2));
+    
+    if (n != 6)
+        return 1;
+    
+    return 0;
+}
+
+
+int run_test(QuadSolverTest test, char* msg) {
     // get solution
     Solution sol = solve_quadratic(test.a, test.b, test.c);
     // test result message
@@ -68,9 +106,22 @@ int run_test(QuadSolverTest test, char* msg){
 }
 
 
-int run_all_test(void){
+int print_test(QuadSolverTest quad_test, int test_index) {
+    char msg[100] = {0};
+    int result = run_test(quad_test, msg);
 
+    if (result)
+        printf("%2d |   FAIL | %s\n", test_index, msg);
+    else
+        printf("%2d |     OK |\n", test_index);
+    
+    return result;
+}
+
+
+int start_testing(FILE *stream) {
     QuadSolverTest tests[] = {
+        // predefined tests
         create_test(1, 2, 3, NO_SOLUTIONS, NAN, NAN),
         create_test(1, 2, -3, TWO_SOLUTIONS, 1, -3),
         create_test(0, 2, 3, ONE_SOLUTION, -1.5, NAN),
@@ -86,17 +137,14 @@ int run_all_test(void){
     printf("~~~~~~~~ Quadratic Solve Testing ~~~~~~~~~\n");
     printf("id | status | message\n");
 
-    for(int i = 1; i <= n; i++) {
-        char msg[100] = {0};
+    for(int i = 1; i <= n; i++)
+        success_counter += 1 - print_test(tests[i-1], i);
 
-        if (run_test(tests[i - 1], msg)) {
-            printf("%2d |   FAIL | %s\n", i, msg);
-        }
-
-        else {
-            success_counter++;
-            printf("%2d |     OK |\n", i);
-        }
+    if (stream) {
+        QuadSolverTest test;
+        
+        while (!read_test(stream, &test))
+            success_counter += 1 - print_test(test, n++);
     }
 
     printf("~~~~~~~~~~~~~~~~~~ %2d/%-2d ~~~~~~~~~~~~~~~~~\n", success_counter, n);
