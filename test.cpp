@@ -72,25 +72,22 @@ int run_all_test(void){
 
     QuadSolverTest tests[] = {
         create_test(1, 2, 3, NO_SOLUTIONS, NAN, NAN),
-        
         create_test(1, 2, -3, TWO_SOLUTIONS, 1, -3),
         create_test(0, 2, 3, ONE_SOLUTION, -1.5, NAN),
         create_test(0, 0, 2, MATH_ERROR, NAN, NAN),
         create_test(0, 0, 0, MATH_ERROR, NAN, NAN),
         create_test(2, 0, 3, NO_SOLUTIONS, NAN, NAN),
-        create_test(2, 3, 0, TWO_SOLUTIONS, 0, -1.5),
-
-        create_test(1e+200, 0, 1e+200, MATH_ERROR, NAN, NAN)
+        create_test(2, 3, 0, TWO_SOLUTIONS, 0, -1.5)
     };
 
     int n = sizeof(tests) / sizeof(QuadSolverTest);
     int success_counter = 0;
-    
+
     printf("~~~~~~~~ Quadratic Solve Testing ~~~~~~~~~\n");
     printf("id | status | message\n");
 
     for(int i = 1; i <= n; i++) {
-        char msg[] = "";
+        char msg[100] = {0};
 
         if (run_test(tests[i - 1], msg)) {
             printf("%2d |   FAIL | %s\n", i, msg);
