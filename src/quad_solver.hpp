@@ -11,7 +11,7 @@
 
 /// Exit codes
 typedef enum EXIT_CODE {
-    UNEXPECTED  = -1, ///< For unknown cases
+    UNEXPECTED  = -1, ///< For unexpected behaviour
     OK          =  0, ///< Well done
     NULL_ARG    =  1, ///< Argument was NULL pointer
     WRONG_INPUT =  2, ///< Wrong input
@@ -41,9 +41,7 @@ enum COMPARE_RESULT {
 };
 
 
-/**
- * \brief Contains the roots of the equation
-*/
+/// Contains the roots of the equation
 typedef struct {
     int status; ///< It's solution status
     double x1; ///< The first root
@@ -104,3 +102,12 @@ int compare(double a, double b);
  * \return Number of passed tests
 */
 int start_testing(FILE *stream);
+
+
+/** 
+ * \brief Parses command line arguments
+ * \param [in] argc Argv size
+ * \param [in] argv List of commands passed to the main()
+ * \return Comparison result (see #COMPARE_RESULT)
+*/
+int parse(int argc, char *argv[]);

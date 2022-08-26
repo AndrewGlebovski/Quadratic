@@ -31,6 +31,7 @@ QuadSolverTest create_test(double a, double b, double c, int status, double x1, 
 /**
  * \brief Reads test from file
  * \param [in] stream To read test
+ * \param [out] test This test will be read from file
  * \return Test for solve_quadratic()
 */
 int read_test(FILE *stream, QuadSolverTest *test);
@@ -144,7 +145,7 @@ int start_testing(FILE *stream) {
         QuadSolverTest test;
         
         while (!read_test(stream, &test))
-            success_counter += 1 - print_test(test, n++);
+            success_counter += 1 - print_test(test, ++n);
     }
 
     printf("~~~~~~~~~~~~~~~~~~ %2d/%-2d ~~~~~~~~~~~~~~~~~\n", success_counter, n);
