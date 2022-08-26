@@ -6,7 +6,7 @@
 #include "quad_solver.hpp"
 
 
-// Contains coefficients of an equation and a solution for this equation (see #Solution)
+/// Contains coefficients of an equation and a solution for this equation (see #Solution)
 typedef struct {
     double a; ///< Coefficient before x^2
     double b; ///< Coefficient before x

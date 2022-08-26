@@ -49,7 +49,7 @@ typedef struct {
 } Solution;
 
 
-/// Input function will scan file file
+/// Input function will scan this file
 extern FILE *in_stream;
 
 

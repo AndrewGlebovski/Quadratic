@@ -6,6 +6,7 @@
 #include "quad_solver.hpp"
 
 
+/// Contains information about argument
 typedef struct {
 	const char* short_name; ///< Command short name
 	const char* long_name; ///< Command long name
@@ -15,10 +16,10 @@ typedef struct {
 } Command;
 
 
-void set_input_stream(char *argv[]);
-void set_output_stream(char *argv[]);
-void run_predefined_tests(char *argv[]);
-void run_tests_from_file(char *argv[]);
+void set_input_stream(char *argv[]); ///< -i parser
+void set_output_stream(char *argv[]); ///< -o parser
+void run_predefined_tests(char *argv[]); ///< -t parser
+void run_tests_from_file(char *argv[]); ///< -ts parser
 
 
 int parse(int argc, char* argv[]) {
@@ -70,4 +71,3 @@ void run_tests_from_file(char *argv[]) {
 	else
 		printf("No filename after %s, argument ignored\n", *argv);
 }
-
