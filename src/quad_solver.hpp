@@ -11,42 +11,50 @@
 
 /// Exit codes
 typedef enum EXIT_CODE {
-    UNEXPECTED  = -1, ///< For unexpected behaviour
-    OK          =  0, ///< Well done
-    NULL_ARG    =  1, ///< Argument was NULL pointer
-    WRONG_INPUT =  2, ///< Wrong input
-    BIG_NUMBER  =  4, ///< Number was too big to handle
-    BIG_EXP     =  5, ///< Expression result was too big to handle
-    NO_FILE     =  6, ///< File not found
-    EXE_FAIL    =  7  ///< File executed with incorrect arguments
+	UNEXPECTED  = -1, ///< For unexpected behaviour
+	OK          =  0, ///< Well done
+	NULL_ARG    =  1, ///< Argument was NULL pointer
+	WRONG_INPUT =  2, ///< Wrong input
+	BIG_NUMBER  =  4, ///< Number was too big to handle
+	BIG_EXP     =  5, ///< Expression result was too big to handle
+	NO_FILE     =  6, ///< File not found
+	EXE_FAIL    =  7  ///< File executed with incorrect arguments
 } EXIT_CODE;
 
 
 /// Shows solution status
 typedef enum SOLUTION_STATUS {
-    MATH_ERROR    = -1, ///< Solutions could not be found cause of a math error
-    NO_SOLUTIONS  =  0, ///< This equation has no solutions.
-    ONE_SOLUTION  =  1, ///< This equation has one solution.
-    TWO_SOLUTIONS =  2, ///< This equation has two solutions.
-    INF_SOLUTIONS =  3, ///< This equation has infinite number of solutions
-    INIT          =  4, ///< Has been just initialized
+	MATH_ERROR    = -1, ///< Solutions could not be found cause of a math error
+	NO_SOLUTIONS  =  0, ///< This equation has no solutions.
+	ONE_SOLUTION  =  1, ///< This equation has one solution.
+	TWO_SOLUTIONS =  2, ///< This equation has two solutions.
+	INF_SOLUTIONS =  3, ///< This equation has infinite number of solutions
+	INIT          =  4, ///< Has been just initialized
 } SOLUTION_STATUS;
 
 
 /// Shows the result of comparing two numbers
 enum COMPARE_RESULT {
-    LESS    = -1, ///< The first number is less than the second
-    EQUAL   =  0, ///< The first number is equal to the second
-    GREATER =  1  ///< The first number is greater than the second
+	LESS    = -1, ///< The first number is less than the second
+	EQUAL   =  0, ///< The first number is equal to the second
+	GREATER =  1  ///< The first number is greater than the second
 };
 
 
 /// Contains the roots of the equation
 typedef struct {
-    int status; ///< It's solution status
-    double x1; ///< The first root
-    double x2; ///< The second root
+	int status; ///< It's solution status
+	double x1; ///< The first root
+	double x2; ///< The second root
 } Solution;
+
+
+/// Input function will scan file file
+extern FILE *in_stream;
+
+
+/// Output function will print in this file
+extern FILE *out_stream;
 
 
 /**

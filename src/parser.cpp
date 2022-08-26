@@ -44,7 +44,7 @@ int parse(int argc, char* argv[]) {
 
 void set_input_stream(char *argv[]) {
 	if (*(argv + 1))
-		FILE* stream = fopen(*(argv + 1), "r");
+		in_stream = fopen(*(argv + 1), "r");
 	else
 		printf("No filename after %s, argument ignored\n", *argv);
 }
@@ -52,7 +52,7 @@ void set_input_stream(char *argv[]) {
 
 void set_output_stream(char *argv[]) {
 	if (*(argv + 1))
-		FILE* stream = fopen(*(argv + 1), "w");
+		out_stream = fopen(*(argv + 1), "w");
 	else
 		printf("No filename after %s, argument ignored\n", *argv);
 }

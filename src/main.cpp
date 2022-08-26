@@ -6,6 +6,10 @@
 #include "quad_solver.hpp"
 
 
+FILE *in_stream = stdin;
+FILE* out_stream =stdout;
+
+
 /** 
  * \brief The main function of the program
  * 
@@ -18,9 +22,6 @@
  * \warning In case of wrong arguments, program will close
 */
 int main(int argc, char *argv[]) {
-    FILE *in_stream = stdin;
-    FILE *out_stream = stdout;
-
     parse(argc, argv);
 
     // init params

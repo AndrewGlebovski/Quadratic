@@ -56,3 +56,6 @@ dkms.conf
 
 # Doxygen
 Docs/
+
+# Debug
+debug/
