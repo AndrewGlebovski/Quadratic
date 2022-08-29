@@ -44,8 +44,14 @@ int parse(int argc, char* argv[]) {
 
 
 void set_input_stream(char *argv[]) {
-	if (*(argv + 1))
+	if (*(argv + 1)) {
 		in_stream = fopen(*(argv + 1), "r");
+
+		if (!in_stream) {
+			printf("Can't open %s after %s, argument ignored\n", *(argv + 1), *argv);
+			in_stream = stdin;
+		}
+	}
 	else
 		printf("No filename after %s, argument ignored\n", *argv);
 }
@@ -61,7 +67,6 @@ void set_output_stream(char *argv[]) {
 
 void run_predefined_tests(char *argv[]) {
 	start_testing(NULL);
-	printf("%s\n", *argv);
 }
 
 
